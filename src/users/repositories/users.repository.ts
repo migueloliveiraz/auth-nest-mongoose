@@ -19,14 +19,13 @@ export class UsersRepository implements UserRepositoryContract {
     return userCreated.save();
   }
 
+  async findById(id: string): Promise<User> {
+    return await this.userModel.findById(id);
+  }
+
   async findByEmail(email: string): Promise<User> {
     return await this.userModel.findOne({ email });
   }
-
-  async findById(_id: string): Promise<User> {
-    return await this.userModel.findById(_id);
-  }
-
   async findAll(): Promise<User[]> {
     return await this.userModel.find({}).select('-password');
   }
@@ -35,5 +34,9 @@ export class UsersRepository implements UserRepositoryContract {
     return await this.userModel.findOneAndUpdate({ _id }, data, {
       new: true,
     });
+  }
+
+  async remove(id: string): Promise<User> {
+    return await this.userModel.findByIdAndDelete(id);
   }
 }
