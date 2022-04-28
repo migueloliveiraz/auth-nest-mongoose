@@ -80,7 +80,8 @@
   },
   "lint-staged": {
     "src/**/*": [
-      "yarn lint"
+      "yarn lint --fix",
+      "prettier --write"
     ]
   }
 }
